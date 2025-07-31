@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useMainStore } from "../store";
 import ItemCard from "./ItemCard";
 import { IMain } from "../infrastructure";
+import { useRouter } from "next/navigation";
 
 export default function MainPage() {
   const {
@@ -64,85 +65,122 @@ export default function MainPage() {
     addData(data);
   };
 
+  const router = useRouter(); // ใช้ useRouter hook จาก Next.js
+
+  const handleRedirect = () => {
+    router.push("/test2"); // ใช้ router.push() เพื่อเปลี่ยน URL
+  };
+
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: "16px",
-      }}
-    >
-      <div style={{ width: "200px" }}>
-        {datas.length > 0 ? (
-          datas.map((data: any, index: number) => (
-            <button key={index} onClick={() => handleClickAdd(data)}>
-              <ItemCard {...data} />
-            </button>
-          ))
-        ) : (
-          <p>Loading data...</p>
-        )}
+    <div className="row" style={{ width: "100%" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: "10px",
+        }}
+      >
+        <h1 style={{ padding: "10px", color: "#000000" }}>
+          Test1: Auto Delete Todo List
+        </h1>
+        <div>
+          <button
+            style={{
+              border: "1px solid #000000",
+              backgroundColor: "#f0f0f0",
+              padding: "10px",
+              color: "#000000",
+              borderRadius: "8px",
+              marginRight: "8px",
+            }}
+            onClick={handleRedirect}
+          >
+            Test2
+          </button>
+        </div>
       </div>
-      <div style={{ width: "300px" }}>
-        <table
-          style={{
-            width: "100%",
-            border: "1px solid #000000",
-            color: "black",
-          }}
-        >
-          <thead>
-            <tr>
-              <th style={{ borderRight: "1px solid #000000" }}>Fruit</th>
-            </tr>
-          </thead>
-          <tbody>
-            {dataFruits.length > 0 ? (
-              dataFruits.map((dataFruit: any, indexFruit: number) => (
-                <tr key={indexFruit}>
-                  <th style={{ borderRight: "1px solid #000000" }}>
-                    <button onClick={() => handleClickDelete(dataFruit)}>
-                      <ItemCard {...dataFruit} />
-                    </button>
-                  </th>
-                </tr>
-              ))
-            ) : (
-              <></>
-            )}
-          </tbody>
-        </table>
-      </div>
-      <div style={{ width: "300px" }}>
-        <table
-          style={{
-            width: "100%",
-            border: "1px solid #000000",
-            color: "black",
-          }}
-        >
-          <thead>
-            <tr>
-              <th>Vegetable</th>
-            </tr>
-          </thead>
-          <tbody>
-            {dataVegetables.length > 0 ? (
-              dataVegetables.map(
-                (dataVegetable: any, indexVegetable: number) => (
-                  <tr key={indexVegetable}>
+
+      <div
+        style={{
+          display: "flex",
+          gap: "16px",
+        }}
+      >
+        <div style={{ width: "200px" }}>
+          {datas.length > 0 ? (
+            datas.map((data: any, index: number) => (
+              <button key={index} onClick={() => handleClickAdd(data)}>
+                <ItemCard {...data} />
+              </button>
+            ))
+          ) : (
+            <p>Loading data...</p>
+          )}
+        </div>
+        <div style={{ width: "300px", marginTop: "5px" }}>
+          <table
+            style={{
+              width: "100%",
+              border: "1px solid #000000",
+              color: "black",
+            }}
+          >
+            <thead>
+              <tr>
+                <th style={{ borderRight: "1px solid #000000" }}>Fruit</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dataFruits.length > 0 ? (
+                dataFruits.map((dataFruit: any, indexFruit: number) => (
+                  <tr key={indexFruit}>
                     <th style={{ borderRight: "1px solid #000000" }}>
-                      <button onClick={() => handleClickDelete(dataVegetable)}>
-                        <ItemCard {...dataVegetable} />
+                      <button onClick={() => handleClickDelete(dataFruit)}>
+                        <ItemCard {...dataFruit} />
                       </button>
                     </th>
                   </tr>
+                ))
+              ) : (
+                <></>
+              )}
+            </tbody>
+          </table>
+        </div>
+        <div style={{ width: "300px", marginTop: "5px" }}>
+          <table
+            style={{
+              width: "100%",
+              border: "1px solid #000000",
+              color: "black",
+            }}
+          >
+            <thead>
+              <tr>
+                <th>Vegetable</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dataVegetables.length > 0 ? (
+                dataVegetables.map(
+                  (dataVegetable: any, indexVegetable: number) => (
+                    <tr key={indexVegetable}>
+                      <th style={{ borderRight: "1px solid #000000" }}>
+                        <button
+                          onClick={() => handleClickDelete(dataVegetable)}
+                        >
+                          <ItemCard {...dataVegetable} />
+                        </button>
+                      </th>
+                    </tr>
+                  )
                 )
-              )
-            ) : (
-              <></>
-            )}
-          </tbody>
-        </table>
+              ) : (
+                <></>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

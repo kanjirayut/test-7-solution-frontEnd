@@ -2,11 +2,6 @@
 import React from "react";
 import "../styles/globals.css"; // นำเข้ารูปแบบ CSS ของโปรเจค
 
-export const metadata = {
-  title: "My App", // ตั้งค่าชื่อเว็บไซต์
-  description: "A Next.js 13+ app with a layout.", // ตั้งคำอธิบายเว็บไซต์
-};
-
 export default function RootLayout({
   children,
 }: {
@@ -17,13 +12,13 @@ export default function RootLayout({
       <body>
         <div className="container">
           <header className="header">
-            <h1>jirayut charoensiri</h1>
+            <h1>Jirayut Charoensiri</h1>
           </header>
 
           <main className="main">{children}</main>
 
           <footer className="footer">
-            <p>&copy; 2025 Test Front-end. All rights reserved.</p>
+            <p>&copy; 2025 Test Front-end 7Solution. All rights reserved.</p>
           </footer>
         </div>
       </body>
